@@ -286,6 +286,56 @@ window.IDERIA_DATA = {
       note: "デモ・ポスター発表",
       url: "https://www.gameamusementsociety.org/html/NationalConvention_24_prog1.html",
       urlLabel: "大会プログラム"
+    },
+    {
+      date: "2025-07-25",
+      venue: "ゲーム学会「ゲームと健康科学」研究部会 第1回研究会",
+      place: "九州情報大学太宰府キャンパス（オンライン開催）",
+      title: "自主制作ゲーム『チョコパキ！』の改良と触覚体験への拡張",
+      authors: "田村明日香・永野斗遠・荒平高章（九州情報大学）",
+      by: ["tamura", "nagano"],
+      url: "https://www.gameamusementsociety.org/html/GameHealthScience_1.html",
+      urlLabel: "研究会プログラム"
+    },
+    {
+      date: "2025-07-25",
+      venue: "ゲーム学会「ゲームと健康科学」研究部会 第1回研究会",
+      place: "九州情報大学太宰府キャンパス（オンライン開催）",
+      title: "新しいゲームコンテストの試行と評価",
+      authors: "永野斗遠・荒平高章（九州情報大学）",
+      by: ["nagano"],
+      url: "https://www.gameamusementsociety.org/html/GameHealthScience_1.html",
+      urlLabel: "研究会プログラム"
+    },
+    {
+      date: "2025-07-25",
+      venue: "ゲーム学会「ゲームと健康科学」研究部会 第1回研究会",
+      place: "九州情報大学太宰府キャンパス（オンライン開催）",
+      title: "VRを用いた3Dモデリング教育の提案",
+      authors: "中嶋文萌・永野斗遠・田村明日香・荒平高章（九州情報大学）",
+      by: ["nagano", "tamura"],
+      url: "https://www.gameamusementsociety.org/html/GameHealthScience_1.html",
+      urlLabel: "研究会プログラム"
+    },
+    {
+      date: "2024-07-26",
+      venue: "ゲーム学会「ゲームと教育」研究部会 第20回研究会",
+      place: "香川大学幸町キャンパス（オンライン開催）",
+      title: "プログラマー向けゲーム制作コンテストの提案",
+      authors: "永野斗遠・荒平高章（九州情報大学）",
+      by: ["nagano"],
+      url: "https://www.eng.kagawa-u.ac.jp/~hayashi/gas/2024-GE-1.pdf",
+      urlLabel: "研究報告（予稿集PDF）"
+    },
+    {
+      date: "2024-07-26",
+      venue: "ゲーム学会「ゲームと教育」研究部会 第20回研究会",
+      place: "香川大学幸町キャンパス（オンライン開催）",
+      title: "自主制作ゲーム「チョコパキ！」の客観的評価",
+      authors: "田村明日香・永野斗遠・荒平高章（九州情報大学）",
+      by: ["tamura", "nagano"],
+      url: "https://www.eng.kagawa-u.ac.jp/~hayashi/gas/2024-GE-1.pdf",
+      urlLabel: "研究報告（予稿集PDF）"
     }
   ],
 
