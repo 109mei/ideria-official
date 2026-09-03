@@ -46,7 +46,7 @@ window.IDERIA_DATA = {
       motif: "one-button",   // 図版モチーフ（§3-3）
       title: "OneButtonGames",
       desc: "高校生・大学生が制作した1ボタンゲーム10作品を収録した専用ランチャー。IDERIA×純真高等学校×九州情報大学の高大連携プロジェクト。ゲーム学会第24回全国大会でデモ展示",
-      image: "https://109mei.github.io/game-learning-archive/images/games/obg-order-recall.png",
+      image: "https://109mei.github.io/game-learning-archive/images/games/obg-launcher.png",
       links: [
         { label: "アーカイブ", url: "https://109mei.github.io/game-learning-archive/activities/one-button-games/" }
       ]
