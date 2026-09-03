@@ -100,7 +100,9 @@ window.IDERIA_DATA = {
       title: "Photary（フォタリー）",
       desc: "写真と一言から感情を読み取り、日記として記録・振り返るアプリの提案。伊嵜音子（純真高等学校）との高大連携。ゲーム学会「ゲームと健康科学」研究部会 第3回研究会で発表。現時点は提案段階で、実装と評価は今後の課題",
       image: "assets/works/08.png",
-      links: []
+      links: [
+        { label: "ポスターを見る", url: "assets/works/08-poster.png" }
+      ]
     }
   ],
 
