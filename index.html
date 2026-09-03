@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDERIA — アイデアを、遊べるかたちに。</title>
+<meta name="description" content="IDERIA（イデリア）は、ゲーム・教材の企画制作を行う団体です。代表: 永野斗遠。高校・大学と連携した制作活動（高大連携）を実施しています。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#12100d" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f1e8" media="(prefers-color-scheme: light)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312100d'/%3E%3Crect x='14.4' y='7' width='3.2' height='18' fill='%23f2a63d'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IDERIA — アイデアを、遊べるかたちに。">
+<meta property="og:description" content="ゲーム・教材の企画制作を行う団体 IDERIA の公式サイト。作品図鑑・活動・受賞。">
+<meta property="og:url" content="https://109mei.github.io/ideria-official/">
+
+<script>
+  /* 描画前にテーマを確定させ、切替時のちらつきを防ぐ（既定はOS設定） */
+  try {
+    var t = localStorage.getItem('ideria-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+    else document.documentElement.removeAttribute('data-theme');
+  } catch (e) { document.documentElement.removeAttribute('data-theme'); }
+</script>
+
+<style>
+/* =========================================================
+   IDERIA official — 「アイデアの工房」
+   ダークトーンの作業場 × 琥珀色（アンバー）の灯り
+   ========================================================= */
+
+/* ---------- カラートークン（ライトが基準・ダークで上書き） ---------- */
+:root{
+  --bg:            #f6f1e8;
+  --bg-deep:       #ece4d6;
+  --panel:         #fffdf8;
+  --panel-2:       #f9f3e8;
+  --line:          #e2d7c4;
+  --line-strong:   #cdbda2;
+  --text:          #241d15;
+  --muted:         #6a5e51;
+  --accent:        #8a5209;
+  --accent-bright: #b06d0f;
+  --accent-ink:    #fffaf2;
+  --accent-soft:   rgba(138,82,9,.10);
+  --glow:          rgba(176,109,15,.20);
+  --grid:          rgba(120,95,55,.11);
+  --shadow-sm: 0 1px 2px rgba(70,50,20,.07);
+  --shadow-md: 0 2px 4px rgba(70,50,20,.06), 0 10px 26px rgba(70,50,20,.09);
+  --shadow-lg: 0 4px 8px rgba(70,50,20,.08), 0 22px 48px rgba(70,50,20,.14);
+  --radius: 14px;
+
+  --font: system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+          "Noto Sans Mono", monospace;
+
+  --header-h: 60px;
+  --maxw: 1120px;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:            #12100d;
+    --bg-deep:       #0c0a08;
+    --panel:         #1b1712;
+    --panel-2:       #221c15;
+    --line:          #2f2820;
+    --line-strong:   #473c2d;
+    --text:          #ece5d8;
+    --muted:         #a49883;
+    --accent:        #f2a63d;
+    --accent-bright: #ffbe5c;
+    --accent-ink:    #180f04;
+    --accent-soft:   rgba(242,166,61,.12);
+    --glow:          rgba(242,166,61,.22);
+    --grid:          rgba(242,166,61,.07);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
+    --shadow-md: 0 2px 4px rgba(0,0,0,.4), 0 12px 28px rgba(0,0,0,.38);
+    --shadow-lg: 0 4px 10px rgba(0,0,0,.45), 0 26px 56px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:            #12100d;
+  --bg-deep:       #0c0a08;
+  --panel:         #1b1712;
+  --panel-2:       #221c15;
+  --line:          #2f2820;
+  --line-strong:   #473c2d;
+  --text:          #ece5d8;
+  --muted:         #a49883;
+  --accent:        #f2a63d;
+  --accent-bright: #ffbe5c;
+  --accent-ink:    #180f04;
+  --accent-soft:   rgba(242,166,61,.12);
+  --glow:          rgba(242,166,61,.22);
+  --grid:          rgba(242,166,61,.07);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
+  --shadow-md: 0 2px 4px rgba(0,0,0,.4), 0 12px 28px rgba(0,0,0,.38);
+  --shadow-lg: 0 4px 10px rgba(0,0,0,.45), 0 26px 56px rgba(0,0,0,.5);
+}
+
+/* ---------- ベース ---------- */
+*,*::before,*::after{ box-sizing:border-box }
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top: calc(var(--header-h) + 18px);
+  -webkit-text-size-adjust:100%;
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  font-size:16px;
+  line-height:1.8;
+  letter-spacing:.01em;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block }
+a{ color:var(--accent); text-decoration-color:color-mix(in srgb, var(--accent) 40%, transparent); text-underline-offset:3px }
+a:hover{ text-decoration-color:currentColor }
+h1,h2,h3{ line-height:1.35; letter-spacing:.02em; margin:0 }
+p{ margin:0 }
+ul{ margin:0; padding:0; list-style:none }
+:where(a,button,summary,[tabindex]):focus-visible{
+  outline:2px solid var(--accent-bright);
+  outline-offset:3px;
+  border-radius:6px;
+}
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:200;
+  background:var(--accent); color:var(--accent-ink);
+  padding:.6rem 1rem; border-radius:0 0 8px 0; font-weight:700;
+}
+.skip:focus{ left:0 }
+.wrap{ width:min(100% - 2.5rem, var(--maxw)); margin-inline:auto }
+@media (max-width:600px){ .wrap{ width:min(100% - 1.75rem, var(--maxw)) } }
+
+/* ---------- ヘッダー ---------- */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  height:var(--header-h);
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:saturate(1.4) blur(10px);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{
+  height:100%; display:flex; align-items:center; gap:1rem;
+}
+.brand{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:var(--mono); font-weight:700; font-size:.95rem;
+  letter-spacing:.26em; color:var(--text); text-decoration:none;
+  flex:0 0 auto;
+}
+.brand::before{
+  content:""; width:3px; height:16px; background:var(--accent);
+  box-shadow:0 0 10px var(--glow); border-radius:2px;
+}
+.brand span{ display:inline-block }
+@media (max-width:820px){ .brand{ letter-spacing:.16em; font-size:.82rem; gap:.45rem } }
+@media (max-width:480px){
+  .brand{ letter-spacing:.1em; font-size:.78rem }
+  .jump a{ font-size:.78rem; padding:.42rem .5rem }
+  .jump a[aria-current="true"]::after{ left:.5rem; right:.5rem }
+  .site-header .wrap{ gap:.6rem }
+  .theme-btn{ width:34px; height:34px }
+}
+
+/* ジャンプ目次 */
+.jump{
+  flex:1 1 auto; min-width:0;
+  display:flex; gap:.15rem; align-items:center;
+  overflow-x:auto; overflow-y:hidden;
+  scrollbar-width:none; -ms-overflow-style:none;
+  mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 12px),transparent 100%);
+}
+.jump::-webkit-scrollbar{ display:none }
+.jump a{
+  flex:0 0 auto;
+  font-size:.82rem; font-weight:600; letter-spacing:.06em;
+  color:var(--muted); text-decoration:none;
+  padding:.42rem .62rem; border-radius:8px;
+  position:relative; white-space:nowrap;
+  transition:color .2s ease, background-color .2s ease;
+}
+.jump a:hover{ color:var(--text); background:var(--accent-soft) }
+.jump a[aria-current="true"]{ color:var(--accent-bright) }
+.jump a[aria-current="true"]::after{
+  content:""; position:absolute; left:.62rem; right:.62rem; bottom:.12rem;
+  height:2px; border-radius:2px; background:var(--accent);
+  box-shadow:0 0 8px var(--glow);
+}
+
+/* テーマ切替 */
+.theme-btn{
+  flex:0 0 auto;
+  width:38px; height:38px; display:grid; place-items:center;
+  border:1px solid var(--line); border-radius:10px;
+  background:var(--panel); color:var(--text); cursor:pointer;
+  transition:border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+.theme-btn:hover{ border-color:var(--line-strong); background:var(--panel-2) }
+.theme-btn:active{ transform:scale(.94) }
+.theme-btn svg{ width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round }
+.theme-btn .i-moon{ display:none }
+:root[data-theme="dark"] .theme-btn .i-sun{ display:none }
+:root[data-theme="dark"] .theme-btn .i-moon{ display:block }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .theme-btn .i-sun{ display:none }
+  :root:not([data-theme="light"]) .theme-btn .i-moon{ display:block }
+}
+
+/* ---------- ヒーロー ---------- */
+.hero{
+  position:relative; isolation:isolate; overflow:hidden;
+  padding:clamp(4rem,13vw,8.5rem) 0 clamp(3.5rem,9vw,6rem);
+  border-bottom:1px solid var(--line);
+  background:var(--bg-deep);
+}
+/* 作業台のグリッド（方眼） */
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:-2;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:46px 46px;
+  mask-image:radial-gradient(120% 90% at 50% 40%, #000 25%, transparent 78%);
+}
+/* 工房の灯り */
+.hero::after{
+  content:""; position:absolute; inset:-30% -10% auto -10%; height:150%; z-index:-1;
+  background:radial-gradient(52% 46% at 50% 22%, var(--glow), transparent 68%);
+  animation:lamp 9s ease-in-out infinite alternate;
+}
+@keyframes lamp{ from{ opacity:.65 } to{ opacity:1 } }
+
+.hero-inner{ text-align:center; display:grid; gap:1.4rem; justify-items:center }
+.hero-eyebrow{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.4em;
+  color:var(--muted); text-transform:uppercase;
+  display:flex; align-items:center; gap:.9rem;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:""; width:clamp(18px,6vw,46px); height:1px; background:var(--line-strong);
+}
+.logo{ display:grid; justify-items:center; gap:.2rem }
+.logo-type{
+  margin:0; font-weight:800;
+  font-size:clamp(3rem, 15vw, 7.5rem);
+  line-height:.95; letter-spacing:.14em; text-indent:.14em;
+  color:var(--text);
+  text-shadow:0 0 42px var(--glow);
+}
+.logo-type .dot{ color:var(--accent) }
+.logo-img{
+  max-height:clamp(70px, 17vw, 150px); width:auto; margin-inline:auto;
+  filter:drop-shadow(0 0 30px var(--glow));
+}
+/* assets/logo.png があるときの h1（画像だけを見せる） */
+.logo-type.is-image{
+  font-size:0; letter-spacing:0; text-indent:0; text-shadow:none; margin:0;
+}
+.logo-rule{
+  width:min(360px,68vw); height:1px; margin-top:.6rem;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity:.75;
+}
+.hero-copy{
+  font-size:clamp(1.15rem, 3.6vw, 1.7rem); font-weight:700;
+  letter-spacing:.06em; margin-top:.2rem;
+}
+.hero-sub{ color:var(--muted); font-size:clamp(.86rem,2.4vw,.98rem); max-width:34rem }
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-weight:700; font-size:.95rem; letter-spacing:.06em;
+  padding:.82rem 1.7rem; border-radius:999px;
+  border:1px solid transparent; cursor:pointer; text-decoration:none;
+  transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.btn-primary{
+  background:var(--accent); color:var(--accent-ink);
+  box-shadow:0 6px 22px var(--glow);
+}
+.btn-primary:hover{ background:var(--accent-bright); transform:translateY(-2px); box-shadow:0 10px 30px var(--glow) }
+.btn-primary:active{ transform:translateY(0) }
+.btn svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round }
+
+/* ---------- セクション共通 ---------- */
+.section{ padding:clamp(3.5rem,8vw,6rem) 0; scroll-margin-top:calc(var(--header-h) + 8px) }
+.section + .section{ border-top:1px solid var(--line) }
+.section-alt{ background:var(--bg-deep) }
+.sec-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:1rem 1.5rem; flex-wrap:wrap; margin-bottom:clamp(1.75rem,4vw,2.75rem);
+}
+.sec-title{ display:grid; gap:.35rem }
+.sec-num{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.34em;
+  color:var(--accent); text-transform:uppercase;
+}
+.sec-title h2{ font-size:clamp(1.5rem,4.4vw,2.15rem); font-weight:800; letter-spacing:.05em }
+.sec-note{ color:var(--muted); font-size:.85rem }
+
+/* 収録数カウンター */
+.counter{
+  font-family:var(--mono); font-size:.8rem; letter-spacing:.2em;
+  color:var(--muted); display:inline-flex; align-items:baseline; gap:.55rem;
+  border:1px solid var(--line); border-radius:999px;
+  padding:.4rem .95rem; background:var(--panel);
+}
+.counter b{ color:var(--accent-bright); font-size:1.05rem; letter-spacing:.1em }
+.counter .slash{ opacity:.5 }
+
+/* ---------- About ---------- */
+.about-grid{ display:grid; gap:clamp(1.75rem,4vw,3rem); grid-template-columns:1fr }
+@media (min-width:820px){ .about-grid{ grid-template-columns:1.15fr .85fr; align-items:start } }
+.about-lead{ font-size:clamp(1.1rem,3vw,1.4rem); font-weight:700; letter-spacing:.04em; margin-bottom:.9rem }
+.about-body{ color:var(--muted); font-size:1rem }
+.about-arch{
+  margin-top:1.5rem; padding:1rem 1.15rem;
+  border-left:3px solid var(--accent); background:var(--accent-soft);
+  border-radius:0 10px 10px 0; font-size:.9rem; color:var(--muted);
+}
+.facts{ display:grid; gap:0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--panel) }
+.facts li{ display:grid; grid-template-columns:6.5rem 1fr; gap:.9rem; padding:.95rem 1.15rem; font-size:.92rem }
+.facts li + li{ border-top:1px solid var(--line) }
+.facts dt,.facts .k{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.16em;
+  color:var(--accent); text-transform:uppercase; padding-top:.35rem;
+}
+@media (max-width:420px){ .facts li{ grid-template-columns:1fr; gap:.1rem } .facts .k{ padding-top:0 } }
+
+/* ---------- 作品図鑑 ---------- */
+.works{ display:grid; gap:clamp(1rem,2.4vw,1.35rem); grid-template-columns:repeat(auto-fill,minmax(275px,1fr)); align-items:start }
+.work{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow-sm); overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.work:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:var(--line-strong) }
+.work.is-open{ border-color:var(--accent); box-shadow:var(--shadow-lg) }
+.work-head{
+  display:block; width:100%; text-align:left; padding:0;
+  background:none; border:0; color:inherit; font:inherit; cursor:pointer;
+}
+.plate{
+  position:relative; aspect-ratio:16/10; overflow:hidden;
+  background:var(--panel-2); border-bottom:1px solid var(--line);
+}
+.plate img{ width:100%; height:100%; object-fit:cover }
+/* 画像がない作品の図版（工房の設計図モチーフ） */
+.plate-art{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    radial-gradient(80% 70% at 50% 115%, var(--glow), transparent 62%);
+  background-size:22px 22px, 22px 22px, 100% 100%;
+}
+.plate-art::after{
+  content:""; position:absolute; inset:0;
+  background:repeating-linear-gradient(
+    calc(var(--a,45) * 1deg),
+    transparent 0 13px,
+    color-mix(in srgb, var(--accent) 12%, transparent) 13px 14px);
+  mask-image:radial-gradient(72% 72% at 50% 45%, #000 18%, transparent 76%);
+}
+.plate-ghost{
+  position:absolute; inset:0; display:grid; place-items:center;
+  font-family:var(--mono); font-weight:800;
+  font-size:clamp(2.6rem,7vw,3.6rem); letter-spacing:.04em;
+  color:color-mix(in srgb, var(--text) 12%, transparent);
+}
+.no-tag{
+  position:absolute; left:.75rem; top:.75rem; z-index:2;
+  display:inline-flex; align-items:baseline; gap:.3rem;
+  font-family:var(--mono); font-weight:700;
+  background:color-mix(in srgb, var(--bg-deep) 82%, transparent);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  border:1px solid var(--line-strong); border-radius:999px;
+  padding:.2rem .68rem; color:var(--accent-bright); font-size:.92rem;
+  letter-spacing:.06em;
+}
+.no-tag small{ font-size:.6rem; letter-spacing:.16em; color:var(--muted) }
+.work-bar{ display:flex; align-items:center; gap:.85rem; padding:.95rem 1.1rem }
+.work-title{ flex:1 1 auto; font-weight:700; font-size:1rem; letter-spacing:.03em; min-width:0 }
+.chev{
+  flex:0 0 auto; width:26px; height:26px; display:grid; place-items:center;
+  border:1px solid var(--line); border-radius:50%; color:var(--muted);
+  transition:transform .3s ease, color .2s ease, border-color .2s ease;
+}
+.chev svg{ width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round }
+.work:hover .chev{ color:var(--accent); border-color:var(--accent) }
+.work.is-open .chev{ transform:rotate(180deg); color:var(--accent); border-color:var(--accent) }
+
+.fold{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .34s cubic-bezier(.4,0,.2,1) }
+.work.is-open .fold{ grid-template-rows:1fr }
+.fold > .fold-in{ overflow:hidden; visibility:hidden; transition:visibility .34s }
+.work.is-open .fold > .fold-in{ visibility:visible }
+.work-body{ padding:0 1.1rem 1.15rem; border-top:1px dashed var(--line); margin-top:0 }
+.work-body p{ font-size:.9rem; color:var(--muted); padding-top:.9rem }
+.work-links{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.95rem }
+.link-chip{
+  display:inline-flex; align-items:center; gap:.35rem;
+  font-size:.8rem; font-weight:700; letter-spacing:.04em;
+  padding:.4rem .85rem; border-radius:999px; text-decoration:none;
+  background:var(--accent-soft); color:var(--accent);
+  border:1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  transition:background-color .2s ease, color .2s ease;
+}
+.link-chip:hover{ background:var(--accent); color:var(--accent-ink) }
+.link-chip .ext{ font-size:.72em; opacity:.85 }
+
+/* ---------- 活動 ---------- */
+.acts{ display:grid; gap:1.1rem }
+.act{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:clamp(1.2rem,3vw,1.7rem); box-shadow:var(--shadow-sm);
+}
+.act h3{ font-size:1.08rem; font-weight:700; letter-spacing:.04em; margin-bottom:1rem }
+.timeline{ display:grid; gap:.1rem }
+.timeline li{
+  display:grid; grid-template-columns:6.5rem 1fr; gap:1rem;
+  padding:.55rem 0 .55rem 0; position:relative; font-size:.92rem;
+}
+.timeline li::before{
+  content:""; position:absolute; left:6.5rem; top:0; bottom:0;
+  width:1px; background:var(--line); transform:translateX(-.5rem);
+}
+.timeline li:first-child::before{ top:.95rem }
+.timeline li:last-child::before{ bottom:calc(100% - .95rem) }
+.timeline .when{
+  font-family:var(--mono); font-size:.78rem; letter-spacing:.08em;
+  color:var(--accent); padding-top:.16rem; white-space:nowrap;
+}
+.timeline .what{ position:relative; color:var(--text) }
+.timeline .what::before{
+  content:""; position:absolute; left:-1.5rem; top:.62rem;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 0 3px var(--bg), 0 0 10px var(--glow);
+}
+.act .work-links{ margin-top:1.1rem }
+@media (max-width:520px){
+  .timeline li{ grid-template-columns:1fr; gap:.05rem; padding-left:1.25rem }
+  .timeline li::before{ left:.28rem; transform:none }
+  .timeline .what::before{ left:-1.25rem; top:.6rem }
+  .timeline .when{ padding-top:0 }
+}
+.acts-more{ margin-top:1.5rem; display:flex; justify-content:center }
+.btn-ghost{
+  background:var(--panel); color:var(--text); border:1px solid var(--line-strong);
+  font-size:.88rem; padding:.7rem 1.4rem;
+}
+.btn-ghost:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-2px) }
+
+/* ---------- 受賞・実績 ---------- */
+.awards{ display:grid; gap:1rem; grid-template-columns:1fr }
+@media (min-width:760px){ .awards{ grid-template-columns:repeat(3,1fr) } }
+.award{
+  position:relative; overflow:hidden;
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  padding:1.5rem 1.35rem 1.4rem; box-shadow:var(--shadow-sm);
+  display:grid; gap:.6rem; align-content:start;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.award:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:var(--line-strong) }
+.award::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px;
+  background:linear-gradient(90deg, var(--accent), transparent);
+}
+.award-badge{
+  justify-self:start;
+  font-family:var(--mono); font-size:.7rem; font-weight:700; letter-spacing:.14em;
+  padding:.28rem .7rem; border-radius:999px;
+  background:var(--accent); color:var(--accent-ink);
+}
+.award h3{ font-size:1rem; font-weight:700; letter-spacing:.03em }
+.award p{ font-size:.86rem; color:var(--muted) }
+
+/* ---------- お知らせ ---------- */
+.news-years{ display:grid; gap:.85rem }
+.year{
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--radius); overflow:hidden;
+}
+.year > summary{
+  display:flex; align-items:center; gap:.8rem; cursor:pointer;
+  padding:1rem 1.25rem; list-style:none; user-select:none;
+  transition:background-color .2s ease;
+}
+.year > summary::-webkit-details-marker{ display:none }
+.year > summary:hover{ background:var(--panel-2) }
+.year-num{ font-family:var(--mono); font-size:1.05rem; font-weight:700; letter-spacing:.1em }
+.year-count{ font-size:.75rem; color:var(--muted); font-family:var(--mono); letter-spacing:.1em }
+.year-mark{
+  margin-left:auto; width:24px; height:24px; display:grid; place-items:center;
+  color:var(--muted); transition:transform .3s ease, color .2s ease;
+}
+.year-mark svg{ width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round }
+.year[open] > summary .year-mark{ transform:rotate(180deg); color:var(--accent) }
+.year[open] > summary{ border-bottom:1px solid var(--line) }
+.news-list{ padding:.35rem 1.25rem 1rem }
+.news-item{ display:grid; gap:.3rem; padding:.95rem 0 }
+.news-item + .news-item{ border-top:1px dashed var(--line) }
+.news-meta{ display:flex; align-items:center; gap:.65rem; flex-wrap:wrap }
+.news-date{ font-family:var(--mono); font-size:.78rem; letter-spacing:.1em; color:var(--muted) }
+.badge-new{
+  font-family:var(--mono); font-size:.62rem; font-weight:700; letter-spacing:.14em;
+  padding:.15rem .5rem; border-radius:999px;
+  background:var(--accent); color:var(--accent-ink);
+  box-shadow:0 0 12px var(--glow);
+}
+.news-title{ font-size:.96rem; font-weight:700; letter-spacing:.02em }
+.news-title a{ text-decoration:none }
+.news-title a:hover{ text-decoration:underline }
+.news-body{ font-size:.86rem; color:var(--muted) }
+
+/* ---------- フッター ---------- */
+.site-footer{
+  border-top:1px solid var(--line); background:var(--bg-deep);
+  padding:clamp(2.75rem,6vw,4rem) 0 2rem;
+}
+.foot-grid{ display:grid; gap:2rem; grid-template-columns:1fr }
+@media (min-width:760px){ .foot-grid{ grid-template-columns:1fr 1.3fr } }
+.foot-brand{ display:grid; gap:.5rem; align-content:start }
+.foot-mark{ font-family:var(--mono); font-weight:800; font-size:1.35rem; letter-spacing:.24em }
+.foot-tag{ color:var(--muted); font-size:.85rem }
+.foot-nav h2{
+  font-family:var(--mono); font-size:.68rem; letter-spacing:.24em;
+  color:var(--accent); text-transform:uppercase; margin-bottom:.85rem;
+}
+.foot-links{ display:grid; gap:.7rem }
+.foot-links a{
+  display:inline-flex; align-items:baseline; gap:.5rem; flex-wrap:wrap;
+  text-decoration:none; color:var(--text); font-size:.92rem; font-weight:600;
+}
+.foot-links a:hover{ color:var(--accent) }
+.foot-links .note{ font-size:.75rem; color:var(--muted); font-weight:400 }
+.foot-links .ext{ font-size:.72em; color:var(--accent) }
+.foot-social{ margin-top:1.5rem }
+.foot-social ul{ display:flex; flex-wrap:wrap; gap:.5rem }
+.copy{
+  margin-top:clamp(2rem,5vw,3rem); padding-top:1.25rem;
+  border-top:1px solid var(--line);
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; color:var(--muted);
+  display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+}
+.to-top{ color:var(--muted); text-decoration:none }
+.to-top:hover{ color:var(--accent) }
+
+/* ---------- 入場アニメーション（reduce で無効） ---------- */
+.reveal{ opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease }
+.reveal.in{ opacity:1; transform:none }
+
+/* ---------- prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto }
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    transition-delay:0ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{ opacity:1; transform:none }
+  .hero::after{ animation:none; opacity:1 }
+  .work:hover,.award:hover,.btn-primary:hover,.btn-ghost:hover{ transform:none }
+}
+
+/* ---------- 印刷 ---------- */
+@media print{
+  .site-header,.theme-btn,.hero::after,.acts-more,.to-top{ display:none !important }
+  .fold{ grid-template-rows:1fr !important }
+  .fold > .fold-in{ visibility:visible !important }
+  body{ background:#fff; color:#000 }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top"><span>IDERIA</span></a>
+    <nav class="jump" id="jump" aria-label="ページ内ジャンプ">
+      <a href="#about">About</a>
+      <a href="#works">作品図鑑</a>
+      <a href="#activities">活動</a>
+      <a href="#awards">受賞・実績</a>
+      <a href="#news">お知らせ</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="配色を切り替える" title="配色を切り替える">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= ヒーロー ================= -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <p class="hero-eyebrow">Idea Workshop</p>
+      <div class="logo" id="logo">
+        <h1 class="logo-type">IDER<span class="dot">I</span>A</h1>
+        <div class="logo-rule" aria-hidden="true"></div>
+      </div>
+      <p class="hero-copy" id="heroCopy">アイデアを、遊べるかたちに。</p>
+      <p class="hero-sub">ゲーム・教材の企画制作を行う団体 IDERIA。<br>生まれたアイデアが作品になるまでを、図鑑のかたちで記録しています。</p>
+      <a class="btn btn-primary" href="#works">
+        作品図鑑を見る
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= About ================= -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="sec-num">01 — About</p>
+          <h2>IDERIAとは</h2>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="about-lead" id="aboutLead"></p>
+          <p class="about-body" id="aboutBody"></p>
+          <p class="about-arch">
+            「遊ぶ・学ぶ」ための場は
+            <a href="https://109mei.github.io/game-learning-archive/" target="_blank" rel="noopener noreferrer">ゲーム制作・プログラミング学習アーカイブ<span class="ext" aria-hidden="true"> ↗</span></a>
+            に、団体の顔としての情報はこの公式サイトにまとめています。
+          </p>
+        </div>
+        <ul class="facts reveal" id="aboutFacts"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 作品図鑑 ================= -->
+  <section class="section section-alt" id="works">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="sec-num">02 — Works</p>
+          <h2>作品図鑑</h2>
+          <p class="sec-note">カードを選ぶと詳細が開きます。</p>
+        </div>
+        <p class="counter" id="counter">
+          <span>WORKS</span><b id="counterNow">01</b><span class="slash">/</span><span id="counterAll">00</span>
+        </p>
+      </div>
+      <div class="works" id="worksGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 活動 ================= -->
+  <section class="section" id="activities">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="sec-num">03 — Activities</p>
+          <h2>活動</h2>
+        </div>
+      </div>
+      <div class="acts" id="actsList"></div>
+      <div class="acts-more" id="actsMore"></div>
+    </div>
+  </section>
+
+  <!-- ================= 受賞・実績 ================= -->
+  <section class="section section-alt" id="awards">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="sec-num">04 — Awards</p>
+          <h2>受賞・実績</h2>
+        </div>
+      </div>
+      <div class="awards" id="awardsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= お知らせ ================= -->
+  <section class="section" id="news">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="sec-num">05 — News</p>
+          <h2>お知らせ</h2>
+          <p class="sec-note">年ごとに開閉できます。</p>
+        </div>
+      </div>
+      <div class="news-years" id="newsYears"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <p class="foot-mark">IDERIA</p>
+        <p class="foot-tag" id="footTag"></p>
+      </div>
+      <div class="foot-nav">
+        <h2>Links</h2>
+        <ul class="foot-links" id="footLinks"></ul>
+        <div class="foot-social" id="footSocial" hidden>
+          <h2>Social</h2>
+          <ul id="footSocialList"></ul>
+        </div>
+      </div>
+    </div>
+    <p class="copy">
+      <span>&copy; IDERIA</span>
+      <a class="to-top" href="#top">↑ ページ上部へ</a>
+    </p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var D = window.IDERIA_DATA || {};
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- 小道具 ---------- */
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function isExternal(url) { return /^https?:\/\//i.test(url); }
+  function linkChip(l) {
+    var a = el('a', 'link-chip');
+    a.href = l.url;
+    a.appendChild(document.createTextNode(l.label));
+    if (isExternal(l.url)) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      var s = el('span', 'ext', '↗');
+      s.setAttribute('aria-hidden', 'true');
+      a.appendChild(s);
+      a.setAttribute('aria-label', l.label + '（別タブで開きます）');
+    }
+    return a;
+  }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+  /* ---------- テーマ切替（既定はOS設定） ---------- */
+  var themeBtn = $('#themeBtn');
+  function currentTheme() {
+    var t = document.documentElement.getAttribute('data-theme');
+    if (t === 'dark' || t === 'light') return t;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('ideria-theme', next); } catch (e) {}
+    themeBtn.setAttribute('aria-label', next === 'dark' ? 'ライトモードに切り替える' : 'ダークモードに切り替える');
+  });
+
+  /* ---------- ロゴ差し替え（assets/logo.png があれば自動で） ---------- */
+  (function () {
+    var src = (D.site && D.site.logo) || 'assets/logo.png';
+    if (!src) return;
+    var probe = new Image();
+    probe.onload = function () {
+      if (!probe.naturalWidth) return;
+      var holder = $('#logo');
+      var img = el('img', 'logo-img');
+      img.src = src;
+      img.alt = (D.site && D.site.logoAlt) || 'IDERIA';
+      var h1 = $('.logo-type', holder);
+      if (!h1) return;
+      h1.textContent = '';
+      h1.classList.add('is-image');
+      h1.appendChild(img);
+    };
+    probe.onerror = function () { /* 画像が無ければタイポのまま */ };
+    probe.src = src;
+  })();
+
+  /* ---------- ヒーローのキャッチコピー ---------- */
+  if (D.site && D.site.tagline) $('#heroCopy').textContent = D.site.tagline;
+
+  /* ---------- About ---------- */
+  (function () {
+    var a = D.about || {};
+    $('#aboutLead').textContent = a.lead || '';
+    $('#aboutBody').textContent = a.body || '';
+    var ul = $('#aboutFacts');
+    (a.facts || []).forEach(function (f) {
+      var li = el('li');
+      li.appendChild(el('span', 'k', f.label));
+      li.appendChild(el('span', 'v', f.value));
+      ul.appendChild(li);
+    });
+  })();
+
+  /* ---------- 作品図鑑 ---------- */
+  var works = D.works || [];
+  (function () {
+    var grid = $('#worksGrid');
+    $('#counterAll').textContent = pad2(works.length);
+    if (works.length) $('#counterNow').textContent = works[0].no;
+
+    works.forEach(function (w, i) {
+      var card = el('article', 'work');
+      card.dataset.no = w.no;
+
+      var bodyId = 'work-' + w.no + '-body';
+      var btn = el('button', 'work-head');
+      btn.type = 'button';
+      btn.id = 'work-' + w.no + '-btn';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-controls', bodyId);
+
+      /* 図版 */
+      var plate = el('div', 'plate');
+      if (w.image) {
+        var img = el('img');
+        img.src = w.image;
+        img.alt = w.title + ' の画像';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.addEventListener('error', function () {
+          /* 画像が取得できないときは図版に切り替え（リンク切れでも崩れない） */
+          img.remove();
+          plate.insertBefore(art(w, i), plate.firstChild);
+        });
+        plate.appendChild(img);
+      } else {
+        plate.appendChild(art(w, i));
+      }
+      var tag = el('span', 'no-tag');
+      var small = el('small', null, 'No.');
+      tag.appendChild(small);
+      tag.appendChild(document.createTextNode(w.no));
+      plate.appendChild(tag);
+      btn.appendChild(plate);
+
+      /* タイトル行 */
+      var bar = el('div', 'work-bar');
+      bar.appendChild(el('span', 'work-title', w.title));
+      var chev = el('span', 'chev');
+      chev.setAttribute('aria-hidden', 'true');
+      chev.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
+      bar.appendChild(chev);
+      btn.appendChild(bar);
+      card.appendChild(btn);
+
+      /* 折りたたみ本文 */
+      var fold = el('div', 'fold');
+      fold.id = bodyId;
+      fold.setAttribute('role', 'region');
+      fold.setAttribute('aria-labelledby', btn.id);
+      var inner = el('div', 'fold-in');
+      var body = el('div', 'work-body');
+      body.appendChild(el('p', null, w.desc));
+      if (w.links && w.links.length) {
+        var ul = el('ul', 'work-links');
+        w.links.forEach(function (l) {
+          var li = el('li');
+          li.appendChild(linkChip(l));
+          ul.appendChild(li);
+        });
+        body.appendChild(ul);
+      }
+      inner.appendChild(body);
+      fold.appendChild(inner);
+      card.appendChild(fold);
+
+      btn.addEventListener('click', function () {
+        var open = card.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) setCounter(w.no);
+      });
+
+      grid.appendChild(card);
+    });
+
+    function art(w, i) {
+      var a = el('div', 'plate-art');
+      a.setAttribute('aria-hidden', 'true');
+      a.style.setProperty('--a', String(20 + (i * 27) % 140));
+      var g = el('span', 'plate-ghost', w.no);
+      a.appendChild(g);
+      return a;
+    }
+  })();
+
+  /* 収録数カウンター: 表示中の作品Noを追う */
+  var counterNow = $('#counterNow');
+  function setCounter(no) { counterNow.textContent = no; }
+  (function () {
+    if (!works.length || !('IntersectionObserver' in window)) return;
+    var visible = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible[e.target.dataset.no] = true;
+        else delete visible[e.target.dataset.no];
+      });
+      var keys = Object.keys(visible).sort();
+      if (keys.length) setCounter(keys[0]);
+    }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+    document.querySelectorAll('.work').forEach(function (c) { io.observe(c); });
+  })();
+
+  /* ---------- 活動 ---------- */
+  (function () {
+    var box = $('#actsList');
+    (D.activities || []).forEach(function (a) {
+      var card = el('article', 'act reveal');
+      card.appendChild(el('h3', null, a.title));
+      if (a.rows && a.rows.length) {
+        var ul = el('ul', 'timeline');
+        a.rows.forEach(function (r) {
+          var li = el('li');
+          li.appendChild(el('span', 'when', r.when));
+          li.appendChild(el('span', 'what', r.what));
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+      }
+      if (a.links && a.links.length) {
+        var ll = el('ul', 'work-links');
+        a.links.forEach(function (l) {
+          var li = el('li');
+          li.appendChild(linkChip(l));
+          ll.appendChild(li);
+        });
+        card.appendChild(ll);
+      }
+      box.appendChild(card);
+    });
+
+    if (D.activitiesMoreUrl) {
+      var a = el('a', 'btn btn-ghost');
+      a.href = D.activitiesMoreUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = 'アーカイブの活動記録を見る ↗';
+      $('#actsMore').appendChild(a);
+    }
+  })();
+
+  /* ---------- 受賞・実績 ---------- */
+  (function () {
+    var grid = $('#awardsGrid');
+    (D.awards || []).forEach(function (a) {
+      var card = el('article', 'award reveal');
+      if (a.badge) card.appendChild(el('span', 'award-badge', a.badge));
+      card.appendChild(el('h3', null, a.title));
+      if (a.detail) card.appendChild(el('p', null, a.detail));
+      grid.appendChild(card);
+    });
+  })();
+
+  /* ---------- お知らせ ---------- */
+  (function () {
+    var box = $('#newsYears');
+    var items = (D.news || []).map(function (n) {
+      var m = String(n.date || '').match(/^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?$/);
+      if (!m) return null;
+      var y = +m[1], mo = m[2] ? +m[2] : 1, d = m[3] ? +m[3] : 1;
+      return {
+        raw: n, y: y,
+        t: Date.UTC(y, mo - 1, d),
+        label: m[3] ? y + '.' + pad2(mo) + '.' + pad2(d) : (m[2] ? y + '.' + pad2(mo) : String(y))
+      };
+    }).filter(Boolean).sort(function (a, b) { return b.t - a.t; });
+
+    /* NEW = 30日以内（これから先の予定も含む） */
+    var now = Date.now();
+    var THIRTY = 30 * 24 * 60 * 60 * 1000;
+
+    var years = [];
+    var byYear = {};
+    items.forEach(function (it) {
+      if (!byYear[it.y]) { byYear[it.y] = []; years.push(it.y); }
+      byYear[it.y].push(it);
+    });
+    years.sort(function (a, b) { return b - a; });
+
+    years.forEach(function (y, idx) {
+      var det = el('details', 'year');
+      if (idx === 0) det.open = true;          /* 最新の年だけ開いておく */
+      var sum = el('summary');
+      sum.appendChild(el('span', 'year-num', String(y)));
+      sum.appendChild(el('span', 'year-count', byYear[y].length + '件'));
+      var mark = el('span', 'year-mark');
+      mark.setAttribute('aria-hidden', 'true');
+      mark.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
+      sum.appendChild(mark);
+      det.appendChild(sum);
+
+      var list = el('ul', 'news-list');
+      byYear[y].forEach(function (it) {
+        var n = it.raw;
+        var li = el('li', 'news-item');
+        var meta = el('div', 'news-meta');
+        meta.appendChild(el('time', 'news-date', it.label));
+        if (it.t >= now - THIRTY) meta.appendChild(el('span', 'badge-new', 'NEW'));
+        li.appendChild(meta);
+
+        var h = el('p', 'news-title');
+        if (n.url) {
+          var a = el('a');
+          a.href = n.url;
+          a.textContent = n.title;
+          if (isExternal(n.url)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+          h.appendChild(a);
+          if (isExternal(n.url)) {
+            var s = el('span', 'ext', ' ↗');
+            s.setAttribute('aria-hidden', 'true');
+            h.appendChild(s);
+          }
+        } else {
+          h.textContent = n.title;
+        }
+        li.appendChild(h);
+        if (n.body) li.appendChild(el('p', 'news-body', n.body));
+        list.appendChild(li);
+      });
+      det.appendChild(list);
+      box.appendChild(det);
+    });
+  })();
+
+  /* ---------- フッター ---------- */
+  (function () {
+    $('#footTag').textContent = (D.site && D.site.tagline) || '';
+    var ul = $('#footLinks');
+    (D.footerLinks || []).forEach(function (l) {
+      var li = el('li');
+      var a = el('a');
+      a.href = l.url;
+      if (isExternal(l.url)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      a.appendChild(document.createTextNode(l.label));
+      if (l.note) a.appendChild(el('span', 'note', l.note));
+      if (isExternal(l.url)) {
+        var s = el('span', 'ext', '↗');
+        s.setAttribute('aria-hidden', 'true');
+        a.appendChild(s);
+      }
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+
+    /* SNSは data.js が空なら欄ごと非表示（§3-7） */
+    var social = D.social || [];
+    if (social.length) {
+      var box = $('#footSocial');
+      var list = $('#footSocialList');
+      social.forEach(function (s) {
+        var li = el('li');
+        li.appendChild(linkChip(s));
+        list.appendChild(li);
+      });
+      box.hidden = false;
+    }
+  })();
+
+  /* ---------- ジャンプ目次のハイライト ---------- */
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('#jump a'));
+    var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); })
+                    .filter(Boolean);
+    if (!secs.length || !('IntersectionObserver' in window)) return;
+    var seen = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting; });
+      var active = null;
+      secs.forEach(function (s) { if (seen[s.id] && !active) active = s.id; });
+      links.forEach(function (a) {
+        if (active && a.getAttribute('href') === '#' + active) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-' + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h'), 10) + 10) + 'px 0px -65% 0px' });
+    secs.forEach(function (s) { io.observe(s); });
+  })();
+
+  /* ---------- 入場アニメーション（reduce のときは何もしない） ---------- */
+  (function () {
+    var targets = document.querySelectorAll('.reveal');
+    if (reduce.matches || !('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(targets, function (t) { t.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    Array.prototype.forEach.call(targets, function (t) { io.observe(t); });
+  })();
+
+})();
+</script>
+</body>
+</html>
