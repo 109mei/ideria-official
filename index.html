@@ -380,6 +380,8 @@ html.js .js-fill:empty{ min-height:0 }
 @media (min-width:820px){ .about-grid{ grid-template-columns:1.15fr .85fr; align-items:start } }
 .about-lead{ font-size:clamp(1.1rem,3vw,1.4rem); font-weight:700; letter-spacing:.04em; margin-bottom:.9rem }
 .about-body{ color:var(--muted); font-size:1rem }
+.about-origin{ margin-top:1rem; font-size:.92rem; color:var(--muted) }
+.about-origin b{ color:var(--fg) }
 .about-note{
   margin-top:1.5rem; padding:1rem 1.15rem;
   border-left:3px solid var(--accent); background:var(--accent-soft);
@@ -507,6 +509,48 @@ html.js .js-fill:empty{ min-height:0 }
 .acts-more{ margin-top:1.5rem; display:flex; justify-content:center }
 
 /* ---------- 受賞・実績 ---------- */
+/* --- メンバー（§3-2a） --- */
+.members{ display:grid; gap:clamp(1rem,2.4vw,1.35rem); grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); align-items:start }
+.member{
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--panel);
+  padding:1.2rem 1.25rem 1.35rem; position:relative; overflow:hidden;
+}
+.member::before{ content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg, var(--accent), transparent) }
+.member-role{
+  display:inline-block; font-family:var(--mono); font-size:.66rem; letter-spacing:.16em;
+  color:var(--accent); border:1px solid var(--line-strong); border-radius:999px; padding:.2rem .6rem; margin-bottom:.55rem;
+}
+.member h3{ font-size:1.06rem; font-weight:700; letter-spacing:.04em }
+.member-org{ font-size:.8rem; color:var(--muted); margin-top:.15rem }
+.member-focus{ font-size:.84rem; margin-top:.5rem }
+.member-focus b{ color:var(--accent) }
+.member-note{ font-size:.86rem; color:var(--muted); margin-top:.55rem }
+.member-credits{ margin-top:.9rem; border-top:1px solid var(--line); padding-top:.8rem }
+.member-credits h4{ font-family:var(--mono); font-size:.66rem; letter-spacing:.16em; color:var(--muted); text-transform:uppercase; margin-bottom:.45rem }
+.member-credits ul{ display:grid; gap:.4rem }
+.member-credits li{ font-size:.84rem; display:grid; grid-template-columns:auto 1fr; gap:.5rem; align-items:baseline }
+.member-credits .kind{
+  font-family:var(--mono); font-size:.6rem; letter-spacing:.1em; color:var(--accent);
+  border:1px solid var(--line-strong); border-radius:4px; padding:.1rem .35rem; white-space:nowrap;
+}
+.member-empty{ font-size:.84rem; color:var(--muted) }
+
+/* --- 実績の一覧（発表・論文） --- */
+.sub-head{ font-size:.95rem; font-weight:700; letter-spacing:.06em; margin:1.9rem 0 .9rem }
+.sub-head:first-of-type{ margin-top:0 }
+.records{ display:grid; gap:.75rem; counter-reset:rec }
+.records li{
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--panel);
+  padding:.9rem 1.05rem; font-size:.88rem;
+}
+.records .rec-meta{ font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; color:var(--accent); margin-bottom:.3rem; display:flex; flex-wrap:wrap; gap:.5rem }
+.records .rec-title{ font-weight:700; letter-spacing:.02em }
+.records .rec-authors{ color:var(--muted); font-size:.82rem; margin-top:.25rem }
+.records .rec-link{ margin-top:.45rem; display:inline-block; font-size:.8rem }
+
+.work-credit{ font-size:.82rem; color:var(--muted); margin-top:.5rem }
+.work-credit b{ color:var(--accent); font-family:var(--mono); font-size:.7rem; letter-spacing:.1em }
+
 .awards{ display:grid; gap:1rem; grid-template-columns:1fr }
 @media (min-width:760px){ .awards{ grid-template-columns:repeat(3,1fr) } }
 .award{
@@ -662,6 +706,7 @@ html.js .js-fill:empty{ min-height:0 }
     <a class="brand" href="#top">IDERIA</a>
     <nav class="jump" id="jump" aria-label="ページ内ジャンプ">
       <a href="#about">About</a>
+      <a href="#members">メンバー</a>
       <a href="#works">作品図鑑</a>
       <a href="#activities">活動</a>
       <a href="#awards">受賞・実績</a>
@@ -694,7 +739,7 @@ html.js .js-fill:empty{ min-height:0 }
         <div class="logo-rule" aria-hidden="true"></div>
       </div>
       <p class="hero-copy" id="heroCopy">アイデアを、遊べるかたちに。</p>
-      <p class="hero-sub">ゲーム・教材の企画制作を行う団体 IDERIA。<br>生まれたアイデアが作品になるまでを、図鑑のかたちで記録しています。</p>
+      <p class="hero-sub">教育的な価値のあるゲームをつくる団体 IDERIA。<br>遊ぶことがそのまま学びになる作品を、図鑑のかたちで記録しています。</p>
       <a class="btn btn-primary" href="#works">
         作品図鑑を見る
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
@@ -715,6 +760,7 @@ html.js .js-fill:empty{ min-height:0 }
         <div class="reveal">
           <p class="about-lead" id="aboutLead"></p>
           <p class="about-body" id="aboutBody"></p>
+          <p class="about-origin" id="aboutOrigin" hidden></p>
           <p class="about-note" id="aboutNote"></p>
         </div>
         <ul class="facts reveal" id="aboutFacts"></ul>
@@ -722,12 +768,26 @@ html.js .js-fill:empty{ min-height:0 }
     </div>
   </section>
 
-  <!-- ================= 作品図鑑 ================= -->
-  <section class="section section-alt" id="works">
+  <!-- ================= メンバー ================= -->
+  <section class="section section-alt" id="members">
     <div class="wrap">
       <div class="sec-head">
         <div class="sec-title">
-          <p class="sec-num"><span lang="en">02 — Works</span></p>
+          <p class="sec-num"><span lang="en">02 — Members</span></p>
+          <h2>メンバー</h2>
+          <p class="sec-note">それぞれの担当と、これまでの功績です。</p>
+        </div>
+      </div>
+      <div class="members" id="membersGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 作品図鑑 ================= -->
+  <section class="section" id="works">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="sec-num"><span lang="en">03 — Works</span></p>
           <h2>作品図鑑</h2>
           <p class="sec-note">カードを選ぶと説明とリンクが開きます。</p>
         </div>
@@ -743,11 +803,11 @@ html.js .js-fill:empty{ min-height:0 }
   </section>
 
   <!-- ================= 活動 ================= -->
-  <section class="section" id="activities">
+  <section class="section section-alt" id="activities">
     <div class="wrap">
       <div class="sec-head">
         <div class="sec-title">
-          <p class="sec-num"><span lang="en">03 — Activities</span></p>
+          <p class="sec-num"><span lang="en">04 — Activities</span></p>
           <h2>活動</h2>
         </div>
       </div>
@@ -757,24 +817,32 @@ html.js .js-fill:empty{ min-height:0 }
   </section>
 
   <!-- ================= 受賞・実績 ================= -->
-  <section class="section section-alt" id="awards">
+  <section class="section" id="awards">
     <div class="wrap">
       <div class="sec-head">
         <div class="sec-title">
-          <p class="sec-num"><span lang="en">04 — Awards</span></p>
+          <p class="sec-num"><span lang="en">05 — Awards</span></p>
           <h2>受賞・実績</h2>
+          <p class="sec-note">受賞は表彰ごとに分けています。出典のあるものはリンクから確認できます。</p>
         </div>
       </div>
+      <h3 class="sub-head">受賞</h3>
       <div class="awards" id="awardsGrid"></div>
+
+      <h3 class="sub-head" id="talksHead" hidden>学会発表</h3>
+      <ol class="records" id="talksList"></ol>
+
+      <h3 class="sub-head" id="papersHead" hidden>論文</h3>
+      <ol class="records" id="papersList"></ol>
     </div>
   </section>
 
   <!-- ================= お知らせ ================= -->
-  <section class="section" id="news">
+  <section class="section section-alt" id="news">
     <div class="wrap">
       <div class="sec-head">
         <div class="sec-title">
-          <p class="sec-num"><span lang="en">05 — News</span></p>
+          <p class="sec-num"><span lang="en">06 — News</span></p>
           <h2>お知らせ</h2>
           <p class="sec-note" id="newsNote" hidden>年ごとに開閉できます。</p>
         </div>
@@ -785,11 +853,11 @@ html.js .js-fill:empty{ min-height:0 }
   </section>
 
   <!-- ================= 関連サイト ================= -->
-  <section class="section section-alt" id="sites">
+  <section class="section" id="sites">
     <div class="wrap">
       <div class="sec-head">
         <div class="sec-title">
-          <p class="sec-num"><span lang="en">06 — Related</span></p>
+          <p class="sec-num"><span lang="en">07 — Related</span></p>
           <h2>関連サイト</h2>
         </div>
       </div>
@@ -842,6 +910,13 @@ html.js .js-fill:empty{ min-height:0 }
   }
   function isExternal(url) { return /^https?:\/\//i.test(url); }
   function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  /* "2026-02-08" → "2026.02.08"（お知らせの日付表記に合わせる） */
+  function jpDate(s) {
+    var m = String(s || '').match(/^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?$/);
+    if (!m) return String(s || '');
+    return m[3] ? m[1] + '.' + pad2(+m[2]) + '.' + pad2(+m[3])
+         : m[2] ? m[1] + '.' + pad2(+m[2]) : m[1];
+  }
   /* 「↗」は装飾。読み上げ名には入れず、代わりに文言で別タブを伝える */
   function extMark() {
     var s = el('span', 'ext', '↗');
@@ -918,6 +993,12 @@ html.js .js-fill:empty{ min-height:0 }
     var a = D.about || {};
     $('#aboutLead').textContent = a.lead || '';
     $('#aboutBody').textContent = a.body || '';
+    if (a.origin) {
+      var org = $('#aboutOrigin');
+      org.hidden = false;
+      org.appendChild(el('b', null, '団体名の由来：'));
+      org.appendChild(document.createTextNode(a.origin));
+    }
     var note = $('#aboutNote');
     if (a.note && a.noteLink) {
       var parts = a.note.split('{link}');
@@ -933,6 +1014,65 @@ html.js .js-fill:empty{ min-height:0 }
       li.appendChild(el('span', 'k', f.label));
       li.appendChild(el('span', 'v', f.value));
       ul.appendChild(li);
+    });
+  })();
+
+  /* ---------- メンバー（§3-2a） ----------
+     works / awards / talks / papers の by[] に id が入っているものを集めて、
+     その人の功績としてカードに並べる。データは1か所（by[]）だけで管理する。 */
+  (function () {
+    var grid = $('#membersGrid');
+    if (!grid) return;
+    var members = D.members || [];
+    if (!members.length) { grid.closest('.section').hidden = true; return; }
+
+    function creditsOf(id) {
+      var out = [];
+      (D.awards || []).forEach(function (a) {
+        if ((a.by || []).indexOf(id) >= 0) out.push({ kind: '受賞', text: a.title, date: a.date });
+      });
+      (D.works || []).forEach(function (w) {
+        if ((w.by || []).indexOf(id) >= 0) out.push({ kind: '制作', text: w.title + (w.credit ? '（' + w.credit + '）' : '') });
+      });
+      (D.talks || []).forEach(function (t) {
+        if ((t.by || []).indexOf(id) >= 0) out.push({ kind: '発表', text: t.title, date: t.date });
+      });
+      (D.papers || []).forEach(function (p) {
+        if ((p.by || []).indexOf(id) >= 0) out.push({ kind: '論文', text: p.title, date: '' });
+      });
+      return out;
+    }
+
+    members.forEach(function (m) {
+      var card = el('article', 'member reveal');
+      if (m.role) card.appendChild(el('span', 'member-role', m.role));
+      card.appendChild(el('h3', null, m.name));
+      if (m.org) card.appendChild(el('p', 'member-org', m.org));
+      if (m.focus) {
+        var f = el('p', 'member-focus');
+        f.appendChild(el('b', null, '担当: '));
+        f.appendChild(document.createTextNode(m.focus));
+        card.appendChild(f);
+      }
+      if (m.note) card.appendChild(el('p', 'member-note', m.note));
+
+      var list = creditsOf(m.id);
+      var box = el('div', 'member-credits');
+      box.appendChild(el('h4', null, 'このメンバーの功績（' + list.length + '件）'));
+      if (list.length) {
+        var ul = el('ul');
+        list.forEach(function (c) {
+          var li = el('li');
+          li.appendChild(el('span', 'kind', c.kind));
+          li.appendChild(el('span', null, c.text));
+          ul.appendChild(li);
+        });
+        box.appendChild(ul);
+      } else {
+        box.appendChild(el('p', 'member-empty', '準備中です。'));
+      }
+      card.appendChild(box);
+      grid.appendChild(card);
     });
   })();
 
@@ -1091,6 +1231,12 @@ html.js .js-fill:empty{ min-height:0 }
       var inner = el('div', 'fold-in');
       var body = el('div', 'work-body');
       body.appendChild(el('p', null, w.desc));
+      if (w.credit) {
+        var cr = el('p', 'work-credit');
+        cr.appendChild(el('b', null, '担当: '));
+        cr.appendChild(document.createTextNode(w.credit));
+        body.appendChild(cr);
+      }
       if (w.links && w.links.length) {
         var ul = el('ul', 'chips');
         w.links.forEach(function (l) {
@@ -1203,8 +1349,35 @@ html.js .js-fill:empty{ min-height:0 }
       var card = el('article', 'award reveal');
       if (a.badge) card.appendChild(el('span', 'award-badge', a.badge));
       card.appendChild(el('h3', null, a.title));
+      if (a.date) card.appendChild(el('p', 'rec-meta', jpDate(a.date)));
       if (a.detail) card.appendChild(el('p', null, a.detail));
+      if (a.url) card.appendChild(anchor(a.url, a.urlLabel || '出典を見る', 'rec-link'));
       grid.appendChild(card);
+    });
+
+    /* 学会発表・論文（§6）。データが無ければ見出しごと出さない */
+    function record(o) {
+      var li = el('li', 'reveal');
+      var meta = el('div', 'rec-meta');
+      if (o.date) meta.appendChild(el('span', null, jpDate(o.date)));
+      if (o.session) meta.appendChild(el('span', null, o.session));
+      if (o.type) meta.appendChild(el('span', null, o.type));
+      if (o.note) meta.appendChild(el('span', null, o.note));
+      if (o.status) meta.appendChild(el('span', null, o.status));
+      if (meta.childNodes.length) li.appendChild(meta);
+      li.appendChild(el('p', 'rec-title', o.title));
+      var sub = [o.venue, o.place].filter(Boolean).join('／');
+      if (sub) li.appendChild(el('p', 'rec-authors', sub));
+      if (o.authors) li.appendChild(el('p', 'rec-authors', o.authors));
+      if (o.url) li.appendChild(anchor(o.url, o.urlLabel || '出典を見る', 'rec-link'));
+      return li;
+    }
+    [['talks', '#talksList', '#talksHead'], ['papers', '#papersList', '#papersHead']].forEach(function (t) {
+      var items = D[t[0]] || [], list = $(t[1]), head = $(t[2]);
+      if (!list) return;
+      if (!items.length) { list.hidden = true; return; }
+      head.hidden = false;
+      items.forEach(function (o) { list.appendChild(record(o)); });
     });
   })();
 
