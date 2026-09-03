@@ -158,7 +158,21 @@ window.IDERIA_DATA = {
     }
   ],
 
-  /* ---------- フッター（§3-7） ---------- */
+  /* ---------- 関連サイト（§3-7・§6） ---------- */
+  relatedSites: [
+    {
+      name: "ゲーム制作・プログラミング学習アーカイブ",
+      desc: "IDERIAや学生の作品をブラウザで遊べるサイト",
+      url: "https://109mei.github.io/game-learning-archive/"
+    },
+    {
+      name: "永野斗遠 ポートフォリオ",
+      desc: "代表・永野斗遠の業績と活動",
+      url: "https://109mei.github.io/"
+    }
+  ],
+
+  /* ---------- フッター（§3-8） ---------- */
   footerLinks: [
     { label: "ゲーム制作・プログラミング学習アーカイブ", url: "https://109mei.github.io/game-learning-archive/", note: "遊ぶ・学ぶ" },
     { label: "ポートフォリオ", url: "https://109mei.github.io/", note: "" }

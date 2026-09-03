@@ -519,6 +519,35 @@ ul{ margin:0; padding:0; list-style:none }
 .news-title a:hover{ text-decoration:underline }
 .news-body{ font-size:.86rem; color:var(--muted) }
 
+/* ---------- 関連サイト ---------- */
+.sites{ display:grid; gap:1rem; grid-template-columns:1fr }
+@media (min-width:720px){ .sites{ grid-template-columns:repeat(2,1fr) } }
+.site-card{
+  position:relative; display:grid; gap:.45rem; align-content:start;
+  padding:clamp(1.35rem,3vw,1.75rem); text-decoration:none; color:inherit;
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.site-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:var(--accent) }
+.site-card::after{
+  content:"↗"; position:absolute; right:1.15rem; top:1.1rem;
+  color:var(--muted); font-size:.95rem;
+  transition:color .2s ease, transform .25s ease;
+}
+.site-card:hover::after{ color:var(--accent); transform:translate(2px,-2px) }
+.site-name{
+  font-size:1.02rem; font-weight:700; letter-spacing:.03em;
+  padding-right:1.75rem;
+}
+.site-card:hover .site-name{ color:var(--accent) }
+.site-desc{ font-size:.88rem; color:var(--muted) }
+.site-host{
+  margin-top:.5rem; font-family:var(--mono); font-size:.72rem;
+  letter-spacing:.08em; color:var(--muted); opacity:.85;
+  overflow-wrap:anywhere;
+}
+
 /* ---------- フッター ---------- */
 .site-footer{
   border-top:1px solid var(--line); background:var(--bg-deep);
@@ -698,6 +727,19 @@ ul{ margin:0; padding:0; list-style:none }
         </div>
       </div>
       <div class="news-years" id="newsYears"></div>
+    </div>
+  </section>
+
+  <!-- ================= 関連サイト ================= -->
+  <section class="section section-alt" id="sites">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-title">
+          <p class="sec-num">06 — Related</p>
+          <h2>関連サイト</h2>
+        </div>
+      </div>
+      <div class="sites" id="sitesGrid"></div>
     </div>
   </section>
 
@@ -1039,6 +1081,27 @@ ul{ margin:0; padding:0; list-style:none }
       det.appendChild(list);
       box.appendChild(det);
     });
+  })();
+
+  /* ---------- 関連サイト ---------- */
+  (function () {
+    var grid = $('#sitesGrid');
+    var sites = D.relatedSites || [];
+    if (!sites.length) { var sec = document.getElementById('sites'); if (sec) sec.hidden = true; return; }
+    sites.forEach(function (s) {
+      var a = el('a', 'site-card reveal');
+      a.href = s.url;
+      if (isExternal(s.url)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      a.appendChild(el('span', 'site-name', s.name));
+      if (s.desc) a.appendChild(el('span', 'site-desc', s.desc));
+      a.appendChild(el('span', 'site-host', hostOf(s.url)));
+      if (isExternal(s.url)) a.setAttribute('aria-label', s.name + '（別タブで開きます）');
+      grid.appendChild(a);
+    });
+    function hostOf(u) {
+      try { var x = new URL(u, location.href); return x.host + x.pathname.replace(/\/$/, ''); }
+      catch (e) { return u; }
+    }
   })();
 
   /* ---------- フッター ---------- */
