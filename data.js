@@ -32,7 +32,7 @@ window.IDERIA_DATA = {
     ],
     // 学習アーカイブとの役割分担（§1）。{link} がリンクに置き換わる
     note: "IDERIAの作品も収録した「遊ぶ・学ぶ」の場は {link} にあります（代表 永野斗遠が個人で運営）。この公式サイトは団体としての情報を置く場所です。",
-    noteLink: { label: "ゲーム制作・プログラミング学習アーカイブ", url: "https://109mei.github.io/game-learning-archive/" }
+    noteLink: { label: "PLAYCE（ゲーム制作・プログラミング学習アーカイブ）", url: "https://109mei.github.io/game-learning-archive/" }
   },
 
   /* ---------- メンバー（§3-2a・§6） ----------
@@ -383,7 +383,7 @@ window.IDERIA_DATA = {
   /* ---------- 関連サイト（§3-7・§6） ---------- */
   relatedSites: [
     {
-      name: "ゲーム制作・プログラミング学習アーカイブ",
+      name: "PLAYCE（ゲーム制作・プログラミング学習アーカイブ）",
       desc: "代表 永野斗遠が個人で運営。IDERIAの作品も収録",
       url: "https://109mei.github.io/game-learning-archive/"
     },
