@@ -525,6 +525,12 @@ html.js .js-fill:empty{ min-height:0 }
 .member-focus{ font-size:.84rem; margin-top:.5rem }
 .member-focus b{ color:var(--accent) }
 .member-note{ font-size:.86rem; color:var(--muted); margin-top:.55rem }
+.member-fig{ margin-top:.9rem }
+.member-fig img{
+  display:block; width:100%; max-width:230px; height:auto; margin:0 auto;
+  border:1px solid var(--line); border-radius:8px; background:var(--panel-2);
+}
+.member-fig figcaption{ margin-top:.4rem; font-size:.75rem; color:var(--muted); text-align:center }
 .member-credits{ margin-top:.9rem; border-top:1px solid var(--line); padding-top:.8rem }
 .member-credits h4{ font-family:var(--mono); font-size:.66rem; letter-spacing:.16em; color:var(--muted); text-transform:uppercase; margin-bottom:.45rem }
 .member-credits ul{ display:grid; gap:.4rem }
@@ -1055,6 +1061,20 @@ html.js .js-fill:empty{ min-height:0 }
         card.appendChild(f);
       }
       if (m.note) card.appendChild(el('p', 'member-note', m.note));
+
+      /* 本人の制作物の図版。読み込めなかったときは枠ごと消す（欠けた画像を出さない） */
+      if (m.image) {
+        var fig = el('figure', 'member-fig');
+        var mi = el('img');
+        mi.src = m.image;
+        mi.alt = m.imageAlt || '';
+        mi.loading = 'lazy';
+        mi.decoding = 'async';
+        mi.addEventListener('error', function () { fig.remove(); });
+        fig.appendChild(mi);
+        if (m.imageCaption) fig.appendChild(el('figcaption', null, m.imageCaption));
+        card.appendChild(fig);
+      }
 
       var list = creditsOf(m.id);
       var box = el('div', 'member-credits');

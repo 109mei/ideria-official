@@ -53,7 +53,11 @@ window.IDERIA_DATA = {
       role: "メンバー",
       org: "九州情報大学",
       focus: "デザイン",
-      note: "IDERIA のロゴと、ゲーム学会 第24回全国大会のテーマポスターをデザイン。「チョコパキ！」ではデザインを担当。"
+      note: "IDERIA のロゴと、ゲーム学会 第24回全国大会のテーマポスターをデザイン。「チョコパキ！」ではデザインを担当。",
+      // 本人がデザインした大会テーマポスター（学会公式が公開しているものを参照）
+      image: "https://www.gameamusementsociety.org/images/GAS2025_poster.png",
+      imageAlt: "ゲーム学会 第24回全国大会のテーマポスター（デザイン: 田村明日香）",
+      imageCaption: "ゲーム学会 第24回全国大会 テーマポスター"
     },
     {
       id: "izaki",
@@ -128,8 +132,10 @@ window.IDERIA_DATA = {
       desc: "IDERIAロゴ、ゲーム学会第24回全国大会（九州情報大学開催）テーマポスターのデザイン",
       credit: "田村明日香",
       by: ["tamura"],
-      image: "",
-      links: []
+      image: "https://www.gameamusementsociety.org/images/GAS2025_poster.png",
+      links: [
+        { label: "大会ページ", url: "https://www.gameamusementsociety.org/html/NationalConvention_24.html" }
+      ]
     },
     {
       no: "07",
