@@ -21,6 +21,7 @@ window.IDERIA_DATA = {
     body: "高校・大学と連携した制作活動（高大連携）を実施しています。",
     facts: [
       { label: "代表", value: "永野斗遠（九州情報大学大学院）" },
+      { label: "メンバー", value: "伊嵜音子（純真高等学校）" },
       { label: "活動", value: "ゲーム・教材の企画制作" },
       { label: "連携", value: "高校・大学と連携した制作活動（高大連携）" }
     ],
@@ -92,6 +93,14 @@ window.IDERIA_DATA = {
       links: [
         { label: "サイトを見る", url: "https://109mei.github.io/game-learning-archive/" }
       ]
+    },
+    {
+      no: "08",
+      motif: "photo-diary",   // 図版モチーフ（§3-3）
+      title: "Photary（フォタリー）",
+      desc: "写真と一言から感情を読み取り、日記として記録・振り返るアプリの提案。伊嵜音子（純真高等学校）との高大連携。ゲーム学会「ゲームと健康科学」研究部会 第3回研究会で発表。現時点は提案段階で、実装と評価は今後の課題",
+      image: "assets/works/08.png",
+      links: []
     }
   ],
 
@@ -141,6 +150,11 @@ window.IDERIA_DATA = {
       badge: "2年連続",
       title: "令和の都だざいふ 世界に羽ばたく人材育成表彰",
       detail: "名義: 永野斗遠・田村明日香・IDERIA"
+    },
+    {
+      badge: "発表",
+      title: "ゲーム学会「ゲームと健康科学」研究部会 第3回研究会",
+      detail: "「Photary」（伊嵜音子・椎葉圭・永野斗遠・荒平高章）"
     },
     {
       badge: "発表・展示",
