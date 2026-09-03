@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- お知らせのRSS。data.js の news に足したら、ここにも同じ1件を足す（docs/SITE_SPEC.md §7）。 -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IDERIA — お知らせ</title>
+    <link>https://109mei.github.io/ideria-official/</link>
+    <atom:link href="https://109mei.github.io/ideria-official/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>ゲーム・教材の企画制作を行う団体 IDERIA のお知らせ</description>
+    <language>ja</language>
+    <item>
+      <title>ゲーム学会「ゲームと健康科学」第3回研究会で発表（予定）</title>
+      <link>https://109mei.github.io/ideria-official/#news</link>
+      <guid isPermaLink="false">ideria-news-2026-09-05</guid>
+      <pubDate>Sat, 05 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>ゲーム制作・プログラミング学習アーカイブを公開しました</title>
+      <link>https://109mei.github.io/game-learning-archive/</link>
+      <guid isPermaLink="false">ideria-news-2026-09</guid>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>令和の都だざいふ 世界に羽ばたく人材育成表彰を受賞（2年連続）</title>
+      <link>https://109mei.github.io/ideria-official/#news</link>
+      <guid isPermaLink="false">ideria-news-2026-02</guid>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 +0900</pubDate>
+    </item>
+  </channel>
+</rss>

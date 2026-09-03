@@ -17,5 +17,11 @@
 
 - `index.html` — サイト本体（単一ページ・依存パッケージなし）
 - `data.js` — 作品・お知らせデータ（仕様書§6と対応）
-- `assets/` — 画像等（`assets/logo.png` を置くとロゴが差し替わる）
+- `assets/` — 画像等
+  - `logo.png` を置くとロゴが差し替わる（`assets/README.md`）
+  - `works/` に作品の図版を置ける（`assets/works/README.md`）
+  - `ogp.png` — SNSでシェアしたときのカード画像
+  - `apple-touch-icon.png`
+- `feed.xml` — お知らせのRSS（お知らせを足したらここにも1件足す。仕様書§7）
+- `sitemap.xml` / `robots.txt` — 検索エンジン向け
 - `docs/SITE_SPEC.md` — 仕様書（正）

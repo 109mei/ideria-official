@@ -23,13 +23,17 @@ window.IDERIA_DATA = {
       { label: "代表", value: "永野斗遠（九州情報大学大学院）" },
       { label: "活動", value: "ゲーム・教材の企画制作" },
       { label: "連携", value: "高校・大学と連携した制作活動（高大連携）" }
-    ]
+    ],
+    // 学習アーカイブとの役割分担（§1）。{link} がリンクに置き換わる
+    note: "遊んだり学んだりする場は {link} に、団体としての情報はこの公式サイトに置いています。",
+    noteLink: { label: "ゲーム制作・プログラミング学習アーカイブ", url: "https://109mei.github.io/game-learning-archive/" }
   },
 
   /* ---------- 作品図鑑（§6） ---------- */
   works: [
     {
       no: "01",
+      motif: "chokopaki",   // 図版モチーフ（§3-3）
       title: "チョコパキ！",
       desc: "Python+Pygameの対戦ゲーム。ゲーム学会 第21回ゲームコンペ優秀賞。物理的触覚体験（おもちゃ化）の試作も実施",
       image: "https://109mei.github.io/game-learning-archive/images/games/ideria-chokopaki.png",
@@ -39,6 +43,7 @@ window.IDERIA_DATA = {
     },
     {
       no: "02",
+      motif: "one-button",   // 図版モチーフ（§3-3）
       title: "OneButtonGames",
       desc: "高校生・大学生が制作した1ボタンゲーム10作品を収録した専用ランチャー。IDERIA×純真高等学校×九州情報大学の高大連携プロジェクト。ゲーム学会第24回全国大会でデモ展示",
       image: "",
@@ -48,6 +53,7 @@ window.IDERIA_DATA = {
     },
     {
       no: "03",
+      motif: "quiz",   // 図版モチーフ（§3-3）
       title: "しまっぴー先生の覚えてクイズ",
       desc: "TyranoScript製の記憶クイズゲーム",
       image: "",
@@ -55,6 +61,7 @@ window.IDERIA_DATA = {
     },
     {
       no: "04",
+      motif: "cards",   // 図版モチーフ（§3-3）
       title: "ひらがなUNO（SHIRITORI）",
       desc: "ひらがなカードでしりとりを行うカードゲーム",
       image: "",
@@ -62,6 +69,7 @@ window.IDERIA_DATA = {
     },
     {
       no: "05",
+      motif: "othello",   // 図版モチーフ（§3-3）
       title: "オセロカードゲーム（試作）",
       desc: "オセロを題材にしたアナログカードゲームの試作",
       image: "",
@@ -69,6 +77,7 @@ window.IDERIA_DATA = {
     },
     {
       no: "06",
+      motif: "poster",   // 図版モチーフ（§3-3）
       title: "IDERIAロゴ・大会ポスター",
       desc: "IDERIAロゴ、ゲーム学会第24回全国大会（九州情報大学開催）テーマポスターのデザイン",
       image: "",
@@ -76,6 +85,7 @@ window.IDERIA_DATA = {
     },
     {
       no: "07",
+      motif: "archive",   // 図版モチーフ（§3-3）
       title: "ゲーム制作・プログラミング学習アーカイブ",
       desc: "ゲームジャム・授業・高大連携の作品をブラウザで遊べる形で公開する学習サイト",
       image: "",
@@ -172,11 +182,9 @@ window.IDERIA_DATA = {
     }
   ],
 
-  /* ---------- フッター（§3-8） ---------- */
-  footerLinks: [
-    { label: "ゲーム制作・プログラミング学習アーカイブ", url: "https://109mei.github.io/game-learning-archive/", note: "遊ぶ・学ぶ" },
-    { label: "ポートフォリオ", url: "https://109mei.github.io/", note: "" }
-  ],
+  /* ---------- フッター（§3-8） ----------
+     外部サイトへの導線は「関連サイト」が担うので、ここでは繰り返さない。
+     セクション目次はページ構成から自動生成される。 */
 
   // SNS: 空のままなら、フッターのSNS欄そのものが表示されない
   // 例) { label: "X", url: "https://..." }
