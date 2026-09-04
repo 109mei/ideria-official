@@ -72,9 +72,13 @@
   --motif-line:    rgba(36,29,21,.52);
   --motif-fill:    rgba(36,29,21,.07);
   --scrim:         rgba(40,30,15,.34);
-  --shadow-sm: 0 1px 2px rgba(70,50,20,.07);
-  --shadow-md: 0 2px 4px rgba(70,50,20,.06), 0 10px 26px rgba(70,50,20,.09);
-  --shadow-lg: 0 4px 8px rgba(70,50,20,.08), 0 22px 48px rgba(70,50,20,.14);
+  /* 影は「縁のリング＋近い影＋遠い影」。真っ黒にせず紙の色みを乗せる
+     （参考: Stripe rgba(50,50,93,.12) / Linear・itch.io は 0 0 0 1px のリング） */
+  --shadow-sm: 0 0 0 1px rgba(70,50,20,.05), 0 1px 2px rgba(70,50,20,.07);
+  --shadow-md: 0 0 0 1px rgba(70,50,20,.06), 0 2px 4px rgba(70,50,20,.06), 0 10px 26px -6px rgba(70,50,20,.11);
+  --shadow-lg: 0 0 0 1px rgba(70,50,20,.08), 0 4px 8px rgba(70,50,20,.08), 0 22px 48px -14px rgba(70,50,20,.18);
+  /* 動きの基準。ホバーは速く、最初が速く最後が緩む曲線にする */
+  --ease: cubic-bezier(.25,.8,.32,1); --dur-fast:.16s;
   --radius: 14px;
 
   --font: system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
@@ -106,9 +110,9 @@
     --motif-line:    rgba(236,229,216,.55);
     --motif-fill:    rgba(236,229,216,.07);
     --scrim:         rgba(0,0,0,.6);
-    --shadow-sm: 0 1px 2px rgba(0,0,0,.5);
-    --shadow-md: 0 2px 4px rgba(0,0,0,.4), 0 12px 28px rgba(0,0,0,.38);
-    --shadow-lg: 0 4px 10px rgba(0,0,0,.45), 0 26px 56px rgba(0,0,0,.5);
+    --shadow-sm: 0 0 0 1px rgba(240,200,140,.05), 0 1px 2px rgba(0,0,0,.5);
+    --shadow-md: 0 0 0 1px rgba(240,200,140,.06), 0 2px 4px rgba(0,0,0,.4), 0 12px 28px -8px rgba(0,0,0,.5);
+    --shadow-lg: 0 0 0 1px rgba(240,200,140,.08), 0 4px 10px rgba(0,0,0,.45), 0 26px 56px -16px rgba(0,0,0,.6);
   }
 }
 :root[data-theme="dark"]{
@@ -426,7 +430,11 @@ html.js .js-fill:empty{ min-height:0 }
   -webkit-mask-image:radial-gradient(90% 80% at 50% 40%, #000, transparent 82%);
           mask-image:radial-gradient(90% 80% at 50% 40%, #000, transparent 82%);
 }
-.plate img{ width:100%; height:100%; object-fit:cover; position:relative; z-index:1 }
+.plate img{ width:100%; height:100%; object-fit:cover; position:relative; z-index:1;
+  transition:transform .32s var(--ease) }
+/* 作品カタログらしく、ホバーで図版がわずかに寄る */
+.work-head:hover .plate img{ transform:scale(1.045) }
+@media (prefers-reduced-motion: reduce){ .work-head:hover .plate img{ transform:none } }
 /* 作品ごとに描き分けた図版 */
 .motif{
   position:absolute; inset:0; width:100%; height:100%; z-index:1;
