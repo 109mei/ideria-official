@@ -43,6 +43,8 @@
     if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
   } catch (e) {}
   document.documentElement.className = 'js';
+  /* 読み込み時に表示されているときだけ入場演出を許可する */
+  if (!document.hidden) document.documentElement.className += ' anim-in';
 </script>
 
 <style>
@@ -672,7 +674,19 @@ html.js .js-fill:empty{ min-height:0 }
 .to-top:hover{ border-color:var(--accent); color:var(--accent) }
 .to-top svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round }
 
-/* ---------- 入場アニメーション ---------- */
+/* ---------- サイトに入ったときの導入 ---------- */
+/* 重要: 通常状態は「見える」まま。透明にするのは @keyframes の from だけ。
+   さらに html.anim-in が付いているときだけ動かす。このクラスは読み込み時点で
+   ページが表示されている場合にのみ付く。バックグラウンドタブで開くと
+   アニメーションが進まず中身が透明のまま残るため。JSが無効なときも付かない。 */
+@keyframes enter-up{ from{ opacity:0; transform:translateY(14px) } to{ opacity:1; transform:none } }
+.anim-in .hero-eyebrow{ animation:enter-up .5s cubic-bezier(.22,.9,.28,1) both }
+.anim-in .hero .logo{ animation:enter-up .6s cubic-bezier(.22,.9,.28,1) .06s both }
+.anim-in .hero-copy{ animation:enter-up .55s cubic-bezier(.22,.9,.28,1) .16s both }
+.anim-in .hero-sub{ animation:enter-up .55s cubic-bezier(.22,.9,.28,1) .24s both }
+.anim-in .hero .btn-primary{ animation:enter-up .55s cubic-bezier(.22,.9,.28,1) .32s both }
+
+/* ---------- 入場アニメーション（スクロール時） ---------- */
 .reveal{ opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease }
 .reveal.in{ opacity:1; transform:none }
 
@@ -692,6 +706,9 @@ html.js .js-fill:empty{ min-height:0 }
 
 /* ---------- 印刷 ---------- */
 @media print{
+  /* 入場演出が途中の状態で印刷されても中身が消えないようにする */
+  *,*::before,*::after{ animation:none !important }
+
   .site-header,.hdr-actions,.sheet,.sheet-scrim,.to-top,.acts-more,.hero::after{ display:none !important }
   .fold{ grid-template-rows:1fr !important }
   .fold > .fold-in{ visibility:visible !important }
