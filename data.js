@@ -101,8 +101,8 @@ window.IDERIA_DATA = {
       motif: "quiz",
       title: "しまっぴー先生の覚えてクイズ",
       desc: "TyranoScript製の記憶クイズゲーム。短期記憶を働かせながら歴史上の人物を覚える",
-      credit: "",
-      by: ["nagano"],
+      credit: "永野斗遠（企画・プログラム）／田村明日香（イラスト）",
+      by: ["nagano", "tamura"],
       image: "assets/works/03.png",
       links: []
     },
