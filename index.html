@@ -162,10 +162,11 @@ a{ color:var(--accent); text-underline-offset:3px }
 h1,h2,h3{ line-height:1.35; letter-spacing:-.01em; margin:0; font-size:inherit; font-weight:inherit }
 p{ margin:0 }
 ul{ margin:0; padding:0; list-style:none }
+/* border-radius をここで指定すると、丸ボタンなどの形がフォーカス時だけ変わりうる。
+   outline は要素自身の角丸に沿うので指定しない。 */
 :where(a,button,summary,[tabindex]):focus-visible{
   outline:2px solid var(--accent-bright);
   outline-offset:3px;
-  border-radius:8px;
 }
 .sr-only{
   position:absolute; width:1px; height:1px; padding:0; margin:-1px;
