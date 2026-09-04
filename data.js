@@ -13,8 +13,9 @@ window.IDERIA_DATA = {
   site: {
     name: "IDERIA",
     tagline: "遊びを、学びのかたちに。",
-    // assets/logo.png を置くと、自動でタイポからロゴ画像に差し替わる
-    logo: "assets/logo.png",
+    /* assets/logo.png を置いたうえで、この行を "assets/logo.png" に戻すと
+       タイポグラフィからロゴ画像に差し替わる。ファイルが無い間は読みに行かない */
+    logo: null,
     logoAlt: "IDERIA ロゴ"
   },
 
