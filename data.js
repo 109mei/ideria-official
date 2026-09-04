@@ -57,6 +57,7 @@ window.IDERIA_DATA = {
       note: "IDERIA のロゴと、ゲーム学会 第24回全国大会のテーマポスターをデザイン。「チョコパキ！」ではデザインを担当。",
       // 本人がデザインした大会テーマポスター（学会公式が公開しているものを参照）
       image: "https://www.gameamusementsociety.org/images/GAS2025_poster.png",
+      imageW: 423, imageH: 600,
       imageAlt: "ゲーム学会 第24回全国大会のテーマポスター（デザイン: 田村明日香）",
       imageCaption: "ゲーム学会 第24回全国大会 テーマポスター"
     },
